@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--共通フレームワーク-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<title>Sample App</title>
+</head>
+<body>
+    <nav class="navbar bg-primary mb-4">
+    	<h1 class="display-4 text-light">Sample-App</h1>
+    </nav>
+    
+    <div class="container">
+    	<p id="msg">Please click button</p>
+        <button  type="button" class="btn btn-primary" onclick="window.testapi.createNewWin()">Click</button>
+
+        <script>
+            const {remote} = require('electron');
+            const {BrowserWindow} = remote;
+
+            function doit(){
+                let win = new BrowserWindow({
+                    width:400,
+                    height:300,
+                    webPreferences:{
+                        nodeIntegration:true,
+                        enableRemoteModule:true
+                    }
+                });
+
+                win.loadFile('index.html');
+                document.querySelector('#msg').textContent = 'Create new Window!';
+            }
+        </script>
+    </div>
+</body>
+</html>
+
+
